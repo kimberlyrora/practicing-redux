@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchInput from "./Search";
+import UserList from './UserList';
 import { Button, Row, Form, Col, Icon } from "antd";
 import "./User.css";
 class UserSearchForm extends Component {
@@ -11,7 +12,7 @@ class UserSearchForm extends Component {
                     <Row>
                         <Col>
                             <Form.Item
-                                label="Busque asegurado">
+                                label="BUSQUE USUARIO">
                                 <SearchInput />
                             </Form.Item>
                         </Col>
@@ -22,6 +23,7 @@ class UserSearchForm extends Component {
                         </Col>
                     </Form.Item>
                 </Form>
+                <UserList />
             </div>
         )
     }
