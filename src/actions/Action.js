@@ -1,3 +1,4 @@
+import { ADD_ARTICLE } from "../constants/index";
 // export const exampleAction = () => (
 //     {
 //         type: 'EXAMPLE'
@@ -10,9 +11,11 @@
 //         payload: sampleData
 //     }
 // )
-export const rotateAction = (payload) => {
+// CREADOR DE ACCIÓN
+export const addArticle = (payload) => {
   return {
-    type: "rotate",
+    type: ADD_ARTICLE,
     payload
-  }
+  };
 }
+export default addArticle
