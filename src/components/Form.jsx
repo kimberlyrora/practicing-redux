@@ -23,16 +23,26 @@ class ConnectedForm extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        // this.props.form.validateFields((err, values) => {
+            // if (values !== '' || values !== err) {
+        // console.log('Received values of form: ', values);
         const { title } = this.state;
         const id = uuidv1();
         this.props.addArticle({ title, id });
         this.setState({ title: '' });
+            // }
+        // });
+
     }
     render() {
+        // const { getFieldDecorator } = this.props.form;
         const { title } = this.state;
         return (
             <Form onSubmit={this.handleSubmit}>
                 <Form.Item>
+                    {/* {getFieldDecorator('article', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                    })( */}
                         <Input
                             type='text'
                             className='form-control'
@@ -41,6 +51,8 @@ class ConnectedForm extends Component {
                             onChange={this.handleChange}
                             placeholder='Add a new article'
                         />
+                    {/* )}
+                    }} */}
                 </Form.Item>
                 <Form.Item>
                     <Button type="submit" onClick={(e) => this.handleSubmit(e)} className='btn btn-succes btn-lg'>
@@ -51,5 +63,7 @@ class ConnectedForm extends Component {
         );
     }
 }
+// const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(ConnectedForm)
 const Formulario = connect(null, mapDispatchToProps)(ConnectedForm);
+// const Formulario = connect(null, mapDispatchToProps)(WrappedNormalLoginForm);
 export default Formulario;
