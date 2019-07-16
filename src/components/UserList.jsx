@@ -1,6 +1,59 @@
 import React, { Component } from "react";
 import { Table } from 'antd';
 class UserList extends Component {
+    state = {
+        sortedInfo: null
+    };
+    
+    handleChange = (sorter) => {
+        let { sortedInfo } = this.state;
+        sortedInfo = sortedInfo || {};
+        console.log('Various parameters', sorter);
+        this.setState({
+            sortedInfo: sorter,
+        });
+    };
+
+    sortEstado = (a, b) => {
+        if (a === 'OnTime' && b === 'OnRisk') {
+          return 1;
+        }
+    
+        if (a === 'OnTime' && b === 'Overdue') {
+          return 1;
+        }
+    
+        if (a === 'OnRisk' && b === 'Overdue') {
+          return 1;
+        }
+    
+        if (a === 'OnRisk' && b === 'OnTime') {
+          return -1;
+        }
+    
+        if (a === 'Overdue' && b === 'OnTime') {
+          return -1;
+        }
+    
+        if (a === 'Overdue' && b === 'OnRisk') {
+          return -1;
+        }
+    
+        return 0;
+    
+      }
+      
+ sortNumbers(a, b) {
+    if (!a) {
+      return -1;
+    }
+  
+    if (!b) {
+      return 1;
+    }
+  
+    return a - b;
+  }
     render() {
         const columns = [{
             title: 'Tarea',
@@ -12,6 +65,7 @@ class UserList extends Component {
             title: 'Nro. Siniestro',
             dataIndex: 'nrosiniestro',
             key: 'nrosiniestro',
+            sorter: (a,b) => this.sortNumbers(a.nrosiniestro, b.nrosiniestro)
         },
         {
             title: 'Nro.Caso',
@@ -68,10 +122,11 @@ class UserList extends Component {
             dataIndex: 'asegurado',
             key: 'asegurado',
         }];
+
         const data = [{
             key: '1',
             tarea: 'COMPLETAR DATOS',
-            nrosiniestro: '27566',
+            nrosiniestro: '27567',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -86,7 +141,7 @@ class UserList extends Component {
         {
             key: '1',
             tarea: 'COMPLETAR DATOS',
-            nrosiniestro: '27566',
+            nrosiniestro: '27528',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -101,7 +156,7 @@ class UserList extends Component {
         {
             key: '1',
             tarea: 'COMPLETAR DATOS',
-            nrosiniestro: '27566',
+            nrosiniestro: '27550',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -116,7 +171,7 @@ class UserList extends Component {
         {
             key: '1',
             tarea: 'ANALIZAR SINIESTRO',
-            nrosiniestro: '27566',
+            nrosiniestro: '00006',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -131,7 +186,7 @@ class UserList extends Component {
         {
             key: '1',
             tarea: 'ANALIZAR SINIESTRO',
-            nrosiniestro: '27566',
+            nrosiniestro: '27526',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -146,7 +201,7 @@ class UserList extends Component {
         {
             key: '1',
             tarea: 'ANALIZAR SINIESTRO',
-            nrosiniestro: '27566',
+            nrosiniestro: '27680',
             nrocaso: 'RG19003119',
             numpoliza: '500837',
             fecocurrencia: '30/08/2002',
@@ -166,6 +221,7 @@ class UserList extends Component {
                     dataSource={data}
                     size='small'
                     scroll={{ x: '100%' }}
+                    onChange={this.handleChange}
                 />
             </React.Fragment>
         )
